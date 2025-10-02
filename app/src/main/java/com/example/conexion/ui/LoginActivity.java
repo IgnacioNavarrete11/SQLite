@@ -3,7 +3,6 @@ package com.example.conexion.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -55,9 +54,19 @@ public class LoginActivity extends AppCompatActivity {
 
         if (dbHelper.checkUser(username, password)) {
             Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(LoginActivity.this, MainMenuActivity.class);
-            startActivity(intent);
-            finish();
+
+            // --- ¡NUEVA LÓGICA DE REDIRECCIÓN! ---
+            if (dbHelper.isAdmin(username)) {
+                // Es un administrador, ir al panel de admin
+                Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+                startActivity(intent);
+            } else {
+                // Es un usuario normal, ir al menú normal
+                Intent intent = new Intent(LoginActivity.this, MainMenuActivity.class);
+                startActivity(intent);
+            }
+            finish(); // Finaliza LoginActivity en ambos casos
+
         } else {
             Toast.makeText(this, "Nombre de usuario o contraseña incorrectos", Toast.LENGTH_LONG).show();
         }
