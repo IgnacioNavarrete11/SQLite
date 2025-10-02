@@ -16,7 +16,6 @@ public class MainMenuActivity extends AppCompatActivity {
     private Button buttonLogout;
     private FoodDbHelper dbHelper;
     private FoodCursorAdapter foodAdapter;
-    private Cursor currentFoodCursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +35,7 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     private void loadFoodMenu() {
-        if (currentFoodCursor != null && !currentFoodCursor.isClosed()) {
-            currentFoodCursor.close();
-        }
-        currentFoodCursor = dbHelper.getAllFoodItems();
+        Cursor currentFoodCursor = dbHelper.getAllFoodItems();
         if (currentFoodCursor != null && currentFoodCursor.getCount() > 0) {
             foodAdapter.changeCursor(currentFoodCursor);
         } else {
@@ -57,17 +53,9 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
     protected void onDestroy() {
         if (foodAdapter != null && foodAdapter.getCursor() != null && !foodAdapter.getCursor().isClosed()) {
             foodAdapter.getCursor().close();
-        }
-        if (currentFoodCursor != null && !currentFoodCursor.isClosed()) { // esto asegura que el cursor directo también se cierre
-            currentFoodCursor.close();
         }
         if (dbHelper != null) {
             dbHelper.close();
