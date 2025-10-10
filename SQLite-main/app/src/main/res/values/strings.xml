@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Conexion</string>
+    <string name="panel_de_administraci_n">Panel de Administración</string>
+    <string name="a_adir_nuevo_plato">Añadir nuevo plato</string>
+</resources>
