@@ -48,6 +48,9 @@ public class FoodCursorAdapter extends CursorAdapter {
         // el formato (ej. puntos vs. comas, símbolo de moneda) sea el correcto
         // para el usuario final, según la configuración de su dispositivo.
         this.currencyFormatter = NumberFormat.getCurrencyInstance(Locale.getDefault());
+
+        Locale chileLocale = new Locale("es", "CL");
+        this.currencyFormatter = NumberFormat.getCurrencyInstance(chileLocale);
     }
 
 

@@ -195,4 +195,62 @@ public class FoodDbHelper extends SQLiteOpenHelper { //hereda una clase de andro
         }
         db.insert(FoodEntry.TABLE_NAME, null, values);
     }
+
+    // <<<--- INICIO DE LOS NUEVOS MÉTODOS PARA GESTIONAR USUARIOS ---
+
+    /**
+     * Obtiene un Cursor con todos los usuarios de la base de datos.
+     * @return Cursor con los datos de los usuarios.
+     */
+    public Cursor getAllUsers() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] projection = {
+                UserEntry._ID,
+                UserEntry.COLUMN_NAME_USERNAME,
+                UserEntry.COLUMN_NAME_EMAIL,
+                UserEntry.COLUMN_NAME_IS_ADMIN
+        };
+        return db.query(UserEntry.TABLE_NAME, projection, null, null, null, null, UserEntry.COLUMN_NAME_USERNAME + " ASC");
+    }
+
+    /**
+     * Actualiza los datos de un usuario existente.
+     * @param id El ID del usuario a actualizar.
+     * @param username El nuevo nombre de usuario.
+     * @param email El nuevo correo electrónico.
+     * @param password La nueva contraseña (si está vacía, no se actualiza).
+     * @param isAdmin Verdadero si el usuario debe ser administrador.
+     * @return El número de filas afectadas.
+     */
+    public int updateUser(long id, String username, String email, String password, boolean isAdmin) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(UserEntry.COLUMN_NAME_USERNAME, username);
+        values.put(UserEntry.COLUMN_NAME_EMAIL, email);
+        values.put(UserEntry.COLUMN_NAME_IS_ADMIN, isAdmin ? 1 : 0);
+
+        // Solo actualiza la contraseña si se proporciona una nueva
+        if (password != null && !password.isEmpty()) {
+            values.put(UserEntry.COLUMN_NAME_PASSWORD_HASH, password);
+        }
+
+        String selection = UserEntry._ID + " = ?";
+        String[] selectionArgs = { String.valueOf(id) };
+
+        return db.update(UserEntry.TABLE_NAME, values, selection, selectionArgs);
+    }
+
+    /**
+     * Elimina un usuario de la base de datos.
+     * @param id El ID del usuario a eliminar.
+     * @return El número de filas eliminadas.
+     */
+    public int deleteUser(long id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String selection = UserEntry._ID + " = ?";
+        String[] selectionArgs = { String.valueOf(id) };
+        return db.delete(UserEntry.TABLE_NAME, selection, selectionArgs);
+    }
+
+    // --- FIN DE LOS NUEVOS MÉTODOS ---
 }
