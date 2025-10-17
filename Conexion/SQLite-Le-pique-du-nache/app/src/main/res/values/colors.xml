@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Paleta de Ejemplo (puedes usar los colores que quieras) -->
+
+    <!-- Colores Principales (Brand Colors) -->
+    <color name="brand_blue_dark">#0D47A1</color>  <!-- Azul para la barra de título -->
+    <color name="brand_blue_darker">#002171</color> <!-- Azul más oscuro para la barra de estado -->
+
+    <!-- Colores de Acento (Botones flotantes, interruptores, etc.) -->
+    <color name="brand_yellow_accent">#FFC107</color> <!-- Amarillo para destacar -->
+
+    <!-- Colores Neutros y de Texto -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="grey_background">#F5F5F5</color> <!-- Un fondo gris claro suave -->
+    <color name="text_primary">#212121</color> <!-- Texto principal, casi negro -->
+    <color name="text_secondary">#757575</color> <!-- Texto secundario, más gris -->
+    <color name="green_success">#4CAF50</color>
+</resources>
