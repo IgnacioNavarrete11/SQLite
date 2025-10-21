@@ -7,12 +7,12 @@
 
     <TextView
         android:id="@+id/textViewFoodName"
+        android:textColor="?attr/colorOnSurface"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Nombre del Plato"
         android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"/>
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/textViewFoodDescription"
@@ -20,7 +20,8 @@
         android:layout_height="wrap_content"
         android:text="Descripción detallada del plato..."
         android:textSize="14sp"
-        android:layout_marginTop="4dp"/>
+        android:layout_marginTop="4dp"
+        android:textColor="?attr/colorOnSurfaceVariant"/> <!-- Puedes usar una variante más tenue -->/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,6 +45,5 @@
             android:text="$0.00"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="@android:color/holo_green_dark"/>
-    </LinearLayout>
+            android:textColor="@color/green_success"/> <!-- Puedes usar tu color de acento -->    </LinearLayout>
 </LinearLayout>

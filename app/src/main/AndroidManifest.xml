@@ -38,6 +38,15 @@
             android:name=".ui.AdminActivity"
             android:exported="false" />
 
+        <!-- ... tus otras activities (MainActivity, LoginActivity, etc.) ... -->
+
+        <!-- === DECLARACIÓN NUEVA PARA GESTIONAR USUARIOS === -->
+        <activity
+            android:name=".ui.UserManagerActivity"
+            android:exported="false"
+            android:label="Gestión de Usuarios" />
+
+
     </application>
 
 </manifest>

@@ -1,11 +1,13 @@
 package com.example.conexion.ui;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -24,6 +26,7 @@ public class AdminActivity extends AppCompatActivity {
     private FoodCursorAdapter foodAdapter;
     private ListView listViewAdminFood;
     private FloatingActionButton fabAddFood;
+    private Button buttonManageUsers; // <<<--- LÍNEA PARA EL BOTÓN
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,7 @@ public class AdminActivity extends AppCompatActivity {
         dbHelper = new FoodDbHelper(this);
         listViewAdminFood = findViewById(R.id.listViewAdminFood);
         fabAddFood = findViewById(R.id.fabAddFood);
+        buttonManageUsers = findViewById(R.id.buttonManageUsers); // <<<--- LÍNEA PARA ENCONTRAR EL BOTÓN
 
         foodAdapter = new FoodCursorAdapter(this, null);
         listViewAdminFood.setAdapter(foodAdapter);
@@ -42,6 +46,13 @@ public class AdminActivity extends AppCompatActivity {
         listViewAdminFood.setOnItemClickListener((parent, view, position, id) -> {
             showFoodEditorDialog(id);
         });
+
+        // <<<--- NUEVO CÓDIGO PARA VINCULAR EL BOTÓN "GESTIONAR USUARIOS" ---
+        buttonManageUsers.setOnClickListener(v -> {
+            Intent intent = new Intent(AdminActivity.this, UserManagerActivity.class);
+            startActivity(intent);
+        });
+        // --- FIN DEL NUEVO CÓDIGO ---
 
         loadFoodItems();
     }
