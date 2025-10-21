@@ -5,6 +5,7 @@ Este proyecto es una aplicación de Android diseñada para la gestión de un men
 ## ✒️ Autores
 
 *   **Ignacio** - *Desarrollo inicial y arquitectura*
+*   **Benjamin** - *Testing y cheqqueo*
 
 ## 🛠️ Entorno de Desarrollo
 
