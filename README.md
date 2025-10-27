@@ -87,4 +87,5 @@ La base del proyecto es sólida y puede expandirse con nuevas funcionalidades:
 
 ## Diagrama Flujo: https://sl1nk.com/LQ0lB
 ## Diagrama Clases: https://sl1nk.com/8uaDP
-## Diagrama de secuencia: https://img.plantuml.biz/plantuml/png/XPJ1RjD048RlaV8EWxcqKeiK7oC5rJGDHQeGQXiuJxpJP62zQ-sk4-1jU01EF49VZDcjZUrGnCMMyl-py-q_urpuW2uqbPvENeGTLGIrHZRJoNGIE6Y2bMu-Mm-Au8xAXap92ETmnpvGXR2oLa5Hrz6_iLyXwqspETpILdpEmjetwDXcyFA6jxlmHZSqdM0PhEiaG0_hsNHI2msNNAC9RJcveWoyv_0jUcwBiIS2B3VNf6joKLyjh-KKCWe4vncgV0vNcYiswE23nl27wQqZCXrKLYYnP0ag7pTCof2e-3zHFY9QBFuA1XQBgAndSFvQhZY7UriYR9eGhEbII6oynq0fXDkYyxhMiFRaJaw7oaVKhEIY9LQrzPqI8ve3AfKA6daOhEWCQlJ-36Igh4y7pPuIZS---1hzBlaFrgbZSKlXa-E06qrBb1TwYbXZazgyOYEjGo-rqC75vL1q1D3VwjwY3v2r6QAosL1zOCD-5qyT7143Iy6FPz_5diVYGeflhDcUbvhBB_3uKnPy44CSSr5qHh-pXpZeAyMoBqj6RRUnPtI8PIrhjkJ77_Ah1KgUOPlBr27hOB9HtQKr3-mgBFdnbnbLjO83QWixehXY4Ybf2XIftWdw2QkZAUOfwBml-FUW1YOPrDF1lTJoE7lmooIfutdbmwpQURMtJUFgHMrHTSY-It00M6Wzaf-zK7lM-uRs5ih6-HZtiqHjnZUoEGYYD_A5V4U58tkHjkL2FbdvN_mD
+## Diagrama de secuencia: https://l1nq.com/LTA5m
+
