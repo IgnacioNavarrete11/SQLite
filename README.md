@@ -1,4 +1,4 @@
-![Imagen de WhatsApp 2025-10-26 a las 00 11 01_33cd1d62](https://github.com/user-attachments/assets/46b158ef-238e-4238-8abc-66752c36e323)# Le Piqué del Nachez - App de Gestión
+# Le Piqué del Nachez - App de Gestión
 
 Este proyecto es una aplicación de Android diseñada para la gestión de un menú de restaurante, incluyendo funcionalidades para clientes y administradores. La app permite a los usuarios ver el menú, mientras que los administradores pueden gestionar tanto los platos como los usuarios del sistema.
 
@@ -85,10 +85,10 @@ La base del proyecto es sólida y puede expandirse con nuevas funcionalidades:
 *   **Migración a `RecyclerView`:** Reemplazar las `ListViews` por `RecyclerView`, que es el componente moderno y más eficiente en Android para mostrar listas.
 *   **Uso de una Arquitectura Moderna:** Refactorizar el código para usar patrones como **MVVM (Model-View-ViewModel)** con **Android Jetpack (ViewModel, LiveData, Room)**. Room, en particular, es una capa de abstracción sobre SQLite que reduce drásticamente el código repetitivo y es menos propenso a errores.
 
-## Diagrama Flujo: https://sl1nk.com/LQ0lB ![Imagen de WhatsApp 2025-10-26 a las 00 11 01_33cd1d62](https://github.com/user-attachments/assets/7cb083eb-7762-4003-af7f-45f04f611c5e)
+## Diagrama Flujo:![Imagen de WhatsApp 2025-10-26 a las 00 11 01_33cd1d62](https://github.com/user-attachments/assets/7cb083eb-7762-4003-af7f-45f04f611c5e)
 
-## Diagrama Clases: https://sl1nk.com/8uaDP ![Imagen de WhatsApp 2025-10-26 a las 00 12 18_103d07ed](https://github.com/user-attachments/assets/0010d49c-de26-4659-80b6-12ad91daa523)
+## Diagrama Clases: ![Imagen de WhatsApp 2025-10-26 a las 00 12 18_103d07ed](https://github.com/user-attachments/assets/0010d49c-de26-4659-80b6-12ad91daa523)
 
-## Diagrama de secuencia: https://sl1nk.com/8SxH2 ![Imagen de WhatsApp 2025-10-27 a las 21 46 14_e65ece7e](https://github.com/user-attachments/assets/b6b36eb3-031a-4a16-ba09-148345ddac73)
+## Diagrama de secuencia:![Imagen de WhatsApp 2025-10-27 a las 21 46 14_e65ece7e](https://github.com/user-attachments/assets/b6b36eb3-031a-4a16-ba09-148345ddac73)
 
 
