@@ -85,10 +85,24 @@ La base del proyecto es sólida y puede expandirse con nuevas funcionalidades:
 *   **Migración a `RecyclerView`:** Reemplazar las `ListViews` por `RecyclerView`, que es el componente moderno y más eficiente en Android para mostrar listas.
 *   **Uso de una Arquitectura Moderna:** Refactorizar el código para usar patrones como **MVVM (Model-View-ViewModel)** con **Android Jetpack (ViewModel, LiveData, Room)**. Room, en particular, es una capa de abstracción sobre SQLite que reduce drásticamente el código repetitivo y es menos propenso a errores.
 
-## Diagrama Flujo:![Imagen de WhatsApp 2025-10-26 a las 00 11 01_33cd1d62](https://github.com/user-attachments/assets/7cb083eb-7762-4003-af7f-45f04f611c5e)
 
-## Diagrama Clases: ![Imagen de WhatsApp 2025-10-26 a las 00 12 18_103d07ed](https://github.com/user-attachments/assets/0010d49c-de26-4659-80b6-12ad91daa523)
 
-## Diagrama de secuencia:![Imagen de WhatsApp 2025-10-27 a las 21 46 14_e65ece7e](https://github.com/user-attachments/assets/b6b36eb3-031a-4a16-ba09-148345ddac73)
+
+
+
+
+## Diagrama Flujo:
+
+
+
+![Imagen de WhatsApp 2025-10-26 a las 00 11 01_33cd1d62](https://github.com/user-attachments/assets/7cb083eb-7762-4003-af7f-45f04f611c5e)
+
+## Diagrama Clases:
+
+![Imagen de WhatsApp 2025-10-26 a las 00 12 18_103d07ed](https://github.com/user-attachments/assets/0010d49c-de26-4659-80b6-12ad91daa523)
+
+## Diagrama de secuencia:
+
+![Imagen de WhatsApp 2025-10-27 a las 21 46 14_e65ece7e](https://github.com/user-attachments/assets/b6b36eb3-031a-4a16-ba09-148345ddac73)
 
 
