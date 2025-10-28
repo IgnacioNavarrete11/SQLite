@@ -87,5 +87,5 @@ La base del proyecto es sólida y puede expandirse con nuevas funcionalidades:
 
 ## Diagrama Flujo: https://sl1nk.com/LQ0lB
 ## Diagrama Clases: https://sl1nk.com/8uaDP
-## Diagrama de secuencia: https://l1nq.com/LTA5m
+## Diagrama de secuencia: https://sl1nk.com/8SxH2
 
