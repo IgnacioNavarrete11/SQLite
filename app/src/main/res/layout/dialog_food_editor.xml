@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <EditText
+        android:id="@+id/editTextFoodName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre del Plato"
+        android:inputType="textCapWords"/>
+
+    <EditText
+        android:id="@+id/editTextFoodDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Descripción"
+        android:inputType="textMultiLine"/>
+
+    <EditText
+        android:id="@+id/editTextFoodPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Precio (ej. 9.99)"
+        android:inputType="numberDecimal"/>
+
+    <EditText
+        android:id="@+id/editTextFoodCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Categoría (ej. Postres)"
+        android:inputType="textCapWords"/>
+
+</LinearLayout>
