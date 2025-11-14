@@ -38,6 +38,11 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     // ✅ AÑADIMOS LA DEPENDENCIA DE FIREBASE AUTH
     implementation(libs.firebase.auth)
+    // ✅ AÑADIMOS LA DEPENDENCIA DE CLOUD FIRESTORE
+    implementation("com.google.firebase:firebase-firestore")
+
+    // ✅ AÑADIMOS LA DEPENDENCIA PARA SWIPE TO REFRESH
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
     implementation(libs.jbcrypt)
     implementation(libs.appcompat)

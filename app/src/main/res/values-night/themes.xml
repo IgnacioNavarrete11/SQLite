@@ -1,7 +1,22 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- Base application theme for night mode. -->
     <style name="Base.Theme.Conexion" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        
+        <!-- Colores Primarios de la Marca (Modo Noche) -->
+        <item name="colorPrimary">@color/brand_purple</item>
+        <item name="colorPrimaryVariant">@color/brand_purple_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        
+        <!-- Colores Secundarios (Acentos) (Modo Noche) -->
+        <item name="colorSecondary">@color/brand_green_accent</item>
+        <item name="colorSecondaryVariant">@color/brand_green_accent</item>
+        <item name="colorOnSecondary">@color/white</item>
+        
+        <!-- Color de la barra de estado -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        
     </style>
+
+    <!-- El tema principal hereda de la base, no necesita cambios -->
+    <style name="Theme.Conexion" parent="Base.Theme.Conexion" />
 </resources>

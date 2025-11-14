@@ -16,7 +16,7 @@
         android:id="@+id/editTextUserEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Correo Electrónico (opcional)"
+        android:hint="Correo Electrónico (obligatorio)"
         android:inputType="textEmailAddress" />
 
     <EditText

@@ -9,91 +9,83 @@ Este proyecto es una aplicación de Android diseñada para la gestión de un men
 
 ## 🛠️ Entorno de Desarrollo
 
-Aunque no puedo detectar la versión exacta de Android Studio, la aplicación está configurada con las siguientes especificaciones técnicas, las cuales son compatibles con las versiones modernas del IDE (como "Hedgehog" o "Iguana"):
+La aplicación está configurada con las siguientes especificaciones técnicas, las cuales son compatibles con las versiones modernas del IDE (como "Hedgehog" o "Iguana"):
 
 *   **Lenguaje:** Java
-*   **Base de Datos:** SQLite nativa de Android.
+*   **Base de Datos:** **100% Firebase**, utilizando **Cloud Firestore** para los datos (menú y usuarios) y **Firebase Authentication** para el registro y login.
 *   **SDK Mínimo:** Se recomienda API 24 (Android 7.0 Nougat) o superior.
-*   **SDK Compilación/Objetivo:** API 33 (Android 13) o superior.
+*   **SDK Compilación/Objetivo:** API 36 o superior.
 
-## 🚀 Cómo Funciona la Aplicación
+## 🏗️ Arquitectura y Componentes Clave
 
-El flujo de la aplicación es sencillo e intuitivo:
+La aplicación sigue una arquitectura que separa la interfaz de usuario, la lógica de negocio y el acceso a datos, todo conectado a los servicios de Firebase.
 
-1.  **Pantalla de Carga (Splash Screen):** Al iniciar, una pantalla de bienvenida se muestra durante unos segundos.
-2.  **Inicio de Sesión:** El usuario es dirigido a una pantalla de login donde puede ingresar sus credenciales. También hay una opción para navegar a la pantalla de registro si no tiene una cuenta.
-3.  **Redirección por Rol:**
-    *   Si el usuario es un **administrador** (ej. "admin"), es dirigido al `AdminActivity`, un panel de control avanzado.
-    *   Si es un **usuario normal**, es dirigido al `MainMenuActivity`, donde puede visualizar el menú del restaurante.
-4.  **Panel de Administrador (`AdminActivity`):** El administrador tiene acceso a dos funcionalidades principales:
-    *   **Gestionar Platos:** Puede añadir, editar y eliminar platos del menú.
-    *   **Gestionar Usuarios:** Puede navegar a una pantalla separada (`UserManagerActivity`) para ver, crear, editar y eliminar usuarios, así como asignarles el rol de administrador.
-5.  **Menú Principal (`MainMenuActivity`):** El usuario estándar puede ver la lista completa de platos disponibles, organizados y formateados.
-6.  **Cerrar Sesión:** Desde el menú principal, el usuario puede cerrar su sesión y volver a la pantalla de login.
+### Directorio `app` (Raíz del Módulo)
 
-## 🏗️ Arquitectura y Clases Principales
-
-La aplicación sigue una arquitectura básica pero robusta, separando la interfaz de usuario, la lógica de negocio y el acceso a datos.
+*   `google-services.json`: **¡El archivo más importante!** Este fichero contiene las "llaves" que conectan esta aplicación específica con tu proyecto de Firebase en la nube. **Nunca debe ser compartido públicamente.** Si clonas este proyecto en otro ordenador, necesitarás descargar tu propio archivo `google-services.json` desde la consola de Firebase y colocarlo en esta carpeta para que la app pueda conectarse a la base de datos.
 
 ### Directorio `ui` (Interfaz de Usuario)
 
 Contiene todas las `Activities` (pantallas) de la aplicación.
 
 *   `MainActivity`: La actividad de entrada. Muestra un splash screen y redirige a `LoginActivity`.
-*   `LoginActivity`: Gestiona el inicio de sesión del usuario.
-*   `RegisterActivity`: Permite a los nuevos usuarios crear una cuenta.
-*   `MainMenuActivity`: Muestra el menú de platos a los usuarios estándar.
-*   `AdminActivity`: Panel de control para administradores, desde donde se gestionan platos y se accede a la gestión de usuarios.
-*   `UserManagerActivity`: Permite al administrador realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) sobre los usuarios.
-*   `FoodCursorAdapter` y `UserCursorAdapter`: Clases clave que actúan como puente entre los datos obtenidos de la base de datos (en un `Cursor`) y las `ListViews` que los muestran. Son responsables de inflar el layout de cada fila y poblarlo con los datos correspondientes.
+*   `LoginActivity`: Gestiona el inicio de sesión del usuario con **Firebase Authentication** y consulta su rol en **Firestore**.
+*   `RegisterActivity`: Permite a los nuevos usuarios crear una cuenta en **Firebase Authentication** y guarda sus datos en **Firestore**.
+*   `MainMenuActivity`: Muestra el menú de platos usando una `RecyclerView` conectada en tiempo real a Firestore.
+*   `AdminActivity`: Panel de control para administradores. Gestiona los platos y permite el acceso a la gestión de usuarios, todo con `RecyclerView` y Firestore.
+*   `UserManagerActivity`: Permite al administrador ver todos los usuarios y cambiar sus roles. Usa `RecyclerView` y se actualiza en tiempo real.
 
-### Directorio `data/db` (Base de Datos)
+### Directorio `model` (Modelo de Datos)
 
-Centraliza toda la lógica relacionada con la base de datos SQLite.
+Clases POJO (Plain Old Java Objects) que sirven como molde para los datos de Firestore.
 
-*   **`TotalFoodContract.java` (El "Contrato"):**
-    *   **Para qué sirve:** Es el "diccionario" o el esquema oficial de la base de datos. Su única función es definir de manera centralizada y sin errores los nombres de las tablas y columnas como constantes `public static final`.
-    *   **Cómo funciona:** Evita errores de tipeo en el código (ej. "usrename" en lugar de "username") y hace que las consultas a la base de datos sean más legibles y fáciles de mantener. Si necesitas cambiar el nombre de una columna, solo lo haces en este archivo.
+*   `FoodItem.java`: Representa un plato del menú.
+*   `User.java`: Representa a un usuario, con su nombre, email y rol.
 
-*   **`FoodDbHelper.java` (El "Ayudante"):**
-    *   **Para qué sirve:** Es el guardián y administrador principal de la base de datos. Hereda de `SQLiteOpenHelper`, una clase de Android que facilita enormemente el trabajo con SQLite.
-    *   **Cómo funciona:**
-        1.  **Creación (`onCreate`):** Se ejecuta automáticamente la primera vez que se accede a la base de datos. Aquí se escriben las sentencias `CREATE TABLE` usando las constantes del `Contract`.
-        2.  **Actualización (`onUpgrade`):** Si incrementas el número de `DATABASE_VERSION`, este método se ejecuta automáticamente. Es el lugar ideal para `ALTER TABLE` o, como en este caso, para borrar las tablas antiguas y volver a crearlas (una estrategia común durante el desarrollo).
-        3.  **Métodos CRUD:** Contiene todos los métodos públicos para interactuar con la base de datos (`addUser`, `checkUser`, `getAllFoodItems`, etc.), encapsulando la lógica SQL y devolviendo los datos de una manera limpia al resto de la app.
-        4.  **Seguridad:** Implementa el hasheo de contraseñas utilizando la librería `jbcrypt`. Las contraseñas nunca se guardan como texto plano. Al registrar un usuario, su contraseña se convierte en un hash seguro antes de almacenarse. Al iniciar sesión, la contraseña ingresada se compara con el hash almacenado, garantizando una autenticación segura.
+### Directorio `adapter` (Adaptadores para RecyclerView)
+
+Clases que conectan los datos de las listas (`foodList`, `userList`) con las `RecyclerView`.
+
+*   `FoodAdapter.java`: Adaptador para mostrar la lista de platos.
+*   `UserAdapter.java`: Adaptador para mostrar la lista de usuarios en el panel de administración.
+
+## 🚀 Cómo Funciona la Aplicación
+
+El flujo de la aplicación es sencillo e intuitivo:
+
+1.  **Pantalla de Carga (Splash Screen):** Al iniciar, una pantalla de bienvenida se muestra durante unos segundos.
+2.  **Registro y Login (Firebase Auth):** El usuario es dirigido a una pantalla de login donde puede ingresar sus credenciales. Si no tiene cuenta, puede navegar a la pantalla de registro. Todo el proceso es gestionado de forma segura por Firebase Authentication.
+3.  **Redirección por Rol (Firestore):**
+    *   Si el usuario tiene el rol de **"admin"** en la base de datos de Firestore, es dirigido al `AdminActivity`.
+    *   Si es un **usuario normal**, es dirigido al `MainMenuActivity`.
+4.  **Panel de Administrador (`AdminActivity`):** El administrador tiene acceso a dos funcionalidades principales, ambas en tiempo real:
+    *   **Gestionar Platos:** Puede añadir, editar y eliminar platos del menú. Los cambios se guardan en Cloud Firestore y se reflejan instantáneamente para todos los usuarios.
+    *   **Gestionar Usuarios:** Puede navegar a `UserManagerActivity` para ver la lista de todos los usuarios registrados y **cambiar su rol** (de "user" a "admin" y viceversa). Los cambios se guardan en Cloud Firestore.
+5.  **Menú Principal (`MainMenuActivity`):** El usuario estándar puede ver la lista completa de platos disponibles, la cual se carga **directamente desde Cloud Firestore y se actualiza en tiempo real**.
+6.  **Cerrar Sesión:** Desde ambas pantallas (admin y usuario), se puede cerrar la sesión.
 
 ## 👥 ¿Para Quién va Dirigido?
 
 Este proyecto es ideal para:
 
-*   **Pequeños Restaurantes o Cafeterías:** Que necesiten una solución digital sencilla para administrar su menú sin depender de sistemas complejos o costosos.
-*   **Estudiantes de Desarrollo Android:** Sirve como un excelente caso de estudio práctico que abarca conceptos fundamentales:
-    *   Múltiples Activities y navegación con `Intent`.
-    *   Uso de `ListView` con `CursorAdapter` para mostrar datos de manera eficiente.
-    *   Gestión completa de una base de datos SQLite con `SQLiteOpenHelper` y un `Contract`.
-    *   Implementación de lógica de roles (usuario vs. administrador).
-    *   Uso de diálogos (`AlertDialog`) para la edición de datos.
+*   **Pequeños Restaurantes o Cafeterías:** Que necesiten una solución digital, moderna y sin costo de servidor para administrar su menú.
+*   **Estudiantes de Desarrollo Android:** Sirve como un excelente caso de estudio práctico que abarca conceptos modernos y esenciales:
+    *   Navegación entre `Activities` con `Intent`.
+    *   Integración completa con **Firebase (Authentication y Firestore)** para una solución 100% cloud.
+    *   Implementación de lógica de roles (usuario vs. administrador) leída desde la nube.
+    *   Uso de `RecyclerView` con adaptadores personalizados.
+    *   Manejo de datos y actualizaciones en tiempo real.
 
 ## 💡 Posibles Mejoras a Futuro
 
-La base del proyecto es sólida y puede expandirse con nuevas funcionalidades:
+La base del proyecto es sólida, moderna y puede expandirse con nuevas funcionalidades:
 
-*   **Imágenes de Platos:** Añadir soporte para que el administrador pueda subir una foto para cada plato y mostrarla en el menú.
-*   **Sistema de Pedidos:** Crear una tabla `orders` que relacione usuarios y platos, permitiendo a los clientes hacer pedidos desde la app.
-*   **Búsqueda y Filtros:** Implementar una barra de búsqueda en el menú para que los clientes puedan filtrar platos por nombre o categoría.
-*   **Migración a `RecyclerView`:** Reemplazar las `ListViews` por `RecyclerView`, que es el componente moderno y más eficiente en Android para mostrar listas.
-*   **Uso de una Arquitectura Moderna:** Refactorizar el código para usar patrones como **MVVM (Model-View-ViewModel)** con **Android Jetpack (ViewModel, LiveData, Room)**. Room, en particular, es una capa de abstracción sobre SQLite que reduce drásticamente el código repetitivo y es menos propenso a errores.
-
-
-
-
-
-
+*   **Reglas de Seguridad en Firestore:** ¡El siguiente paso más importante! Definir reglas de seguridad en la consola de Firebase para garantizar que solo los usuarios autenticados puedan leer y que solo los administradores puedan escribir en las colecciones.
+*   **Imágenes de Platos:** Añadir soporte para que el administrador pueda subir una foto para cada plato (usando **Firebase Storage**) y mostrarla en el menú.
+*   **Sistema de Pedidos:** Crear una colección `orders` en Firestore que relacione usuarios y platos, permitiendo a los clientes hacer pedidos desde la app.
+*   **Búsqueda y Filtros:** Implementar una barra de búsqueda en el menú para que los clientes puedan filtrar platos por nombre.
 
 ## Diagrama Flujo:
-
-
 
 ![Imagen de WhatsApp 2025-10-26 a las 00 11 01_33cd1d62](https://github.com/user-attachments/assets/7cb083eb-7762-4003-af7f-45f04f611c5e)
 
@@ -104,5 +96,3 @@ La base del proyecto es sólida y puede expandirse con nuevas funcionalidades:
 ## Diagrama de secuencia:
 
 ![Imagen de WhatsApp 2025-10-27 a las 21 46 14_e65ece7e](https://github.com/user-attachments/assets/b6b36eb3-031a-4a16-ba09-148345ddac73)
-
-
